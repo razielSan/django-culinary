@@ -1,0 +1,7 @@
+{%  if form.errors  %}
+                    {% for error in form.errors.as_data.values %}
+                        {% for data in error.0 %}
+                            {{ data }}
+                        {% endfor %}
+                    {% endfor %}
+{% endif %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load cache %}
+
+
+{% block main %}
+
+<h2>Кулинарный портал</h2>
+<div class="d-flex justify-content-between">
+    <div class="col-3">
+        <!-- Sidebar-->
+        
+        <!-- Кэширование на базе темплэйтов -->
+    <!-- {% cache 500 sidebar %} -->
+        {% include "cooking/components/_category_buttons.html" %}    
+    <!-- {% endcache %} -->
+    </div>
+    <!-- Posts-->
+    <div class="col-8">
+        <!-- Post-->
+            {% include "cooking/components/_posts_list.html" %}
+        <!-- Post-->
+    </div>
+</div>
+
+{% endblock main %}

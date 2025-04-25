@@ -1,0 +1,67 @@
+{% load static %}
+
+<div class="container">
+  <!--   Header-->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#!">
+        <img src="{% static 'media/img/images.png' %}" width="75" alt="Картинка" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Переключатель навигации"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Главная</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
+            <input
+              name="q"
+              class="form-control me-2"
+              type="search"
+              placeholder="Поиск"
+              aria-label="Поиск"
+            />
+            <button class="btn btn-outline-success" type="submit">Поиск</button>
+          </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Здравствуйте {{ request.user.username}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'profile' request.user.pk %}">Моя страница</a></li>
+                  <li><a class="dropdown-item" href="{% url "add_post" %}">Добавить статью</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="{% url 'user_logout' %}">Выход</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <a class="nav-link active" aria-current="page" href="{% url 'user_login' %}">Войти</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'user_register' %}">Зарегестрироваться</a>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
